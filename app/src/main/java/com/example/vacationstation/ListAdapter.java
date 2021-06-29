@@ -17,7 +17,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ItemViewHolder
 
     private List<MemoryItem> mItems;
     private Context mContext;
-    private  ListItemClickListener mListItemClickListener;
+    private ListItemClickListener mListItemClickListener;
 
     public ListAdapter(List<MemoryItem> mItems) {
         this.mItems = mItems;
@@ -63,13 +63,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ItemViewHolder
     public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView tvName;
-        private TextView tvType;
+        private TextView tvTags;
         private LinearLayout llItem;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
-            tvType = itemView.findViewById(R.id.tv_type);
+            tvTags = itemView.findViewById(R.id.tv_tags);
             llItem = itemView.findViewById(R.id.ll_item);
             itemView.setOnClickListener(this);
         }
@@ -77,7 +77,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ItemViewHolder
 
         public void bind(int position) {
             tvName.setText(mItems.get(position).getName());
-            tvType.setText(mItems.get(position).getTags());
+            tvTags.setText(mItems.get(position).getTags());
             //llItem.setBackgroundResource(mItems.get(position).getColor());
         }
 

@@ -91,23 +91,23 @@ public class Overview extends Fragment {
             }
         });
 
-        btn_swap.setOnClickListener(new View.OnClickListener() {
+        /*btn_swap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 lst_memories = generateContent();
             }
-        });
+        });*/
 
 
         return view;
     }
 
-    private List<MemoryItem> generateContent() {
+    /*private List<MemoryItem> generateContent() {
         List<MemoryItem> data = new LinkedList<>();
         data.add(new MemoryItem("vienna1", "austria, flower, summer", "awesome",48.190498, 16.400408,  "card1.png"));
         data.add(new MemoryItem("vienna2", "austria, ancient, summer", "awesome", 48.190998, 16.420408, "card2.png"));
         data.add(new MemoryItem("vienna5", "austria, old, summer", "awesome", 48.190098, 16.395408, "card3.png"));
         data.add(new MemoryItem("vienna10", "austria, flower, summer", "awesome", 48.191018, 16.401408, "card2.png"));
         return data;
-    }
+    }*/
 }

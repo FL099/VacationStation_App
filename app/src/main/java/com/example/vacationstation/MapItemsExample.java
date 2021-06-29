@@ -66,6 +66,7 @@ public class MapItemsExample {
         double distanceInMeters = 1000 * 10;
         camera.lookAt(new GeoCoordinates(48.190798, 16.400408), distanceInMeters);
 
+
         // Setting a tap handler to pick markers from map.
         setTapGestureHandler();
 
