@@ -71,7 +71,6 @@ public class Overview extends Fragment {
         MainActivity.mAdapter = new ListAdapter(MainActivity.getContentFromDB());
         list.setAdapter(MainActivity.mAdapter);*/
 
-        btn_swap = view.findViewById(R.id.btn_swap);
 
         //lst_memories = generateContent();
         lst_memories = MainActivity.generateContent(); //TODO
@@ -93,14 +92,6 @@ public class Overview extends Fragment {
                 startActivity(i);
             }
         });
-
-        /*btn_swap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lst_memories = generateContent();
-            }
-        });*/
-
 
         return view;
     }
