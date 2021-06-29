@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">VacationStation</string>
+    <string name="title_home">Home</string>
+    <string name="title_overview">Overview</string>
+    <string name="title_add">Add</string>
+    <string name="title_map">Map</string>
+    <string name="title_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="click_me">click me!</string>
+</resources>
