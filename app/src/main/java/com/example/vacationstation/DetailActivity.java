@@ -34,6 +34,7 @@ public class DetailActivity extends AppCompatActivity {
         MemoryItem it = getIntent().getParcelableExtra(EXTRA_MEMORY_KEY);
 
         img.setImageResource(R.drawable.card1);//TODO ändern auf jeweiliges Bild
+
         img_title.setText(it.getName());
         img_title.setTextSize(30);
         img_tags.setText("tags: " +it.getTags());
