@@ -1,5 +1,6 @@
 package com.example.vacationstation.ui.Overview;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.vacationstation.DetailActivity;
 import com.example.vacationstation.ListAdapter;
 import com.example.vacationstation.MainActivity;
 import com.example.vacationstation.MemoryItem;
@@ -86,8 +88,9 @@ public class Overview extends Fragment {
             public void onListItemClick(MemoryItem item) {
                 //deleteInput(item);
                 //upperCaseInput(item);
-                mAdapter.swapData(lst_memories); //getContentFromDB()
-                System.out.println(lst_memories);
+                Intent i = new Intent(getContext(),DetailActivity.class);
+                i.putExtra(DetailActivity.EXTRA_MEMORY_KEY, item);
+                startActivity(i);
             }
         });
 
