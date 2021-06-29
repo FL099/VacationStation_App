@@ -101,11 +101,14 @@ public class MapItemsExample {
 
         // Centered on location.
         addPhotoMapMarker(geoCoordinates);
+
+
+
         for (MemoryItem m:MainActivity.lst_memories) {
             GeoCoordinates geo = new GeoCoordinates(m.getCoordLat(), m.getCoordLon());
             addPhotoMapMarker(geo, R.drawable.card1);
 
-            if (Settings.Dot){
+            if (!Settings.Dot){
                 addCircleMapMarker(geo);
             }
 
