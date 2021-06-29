@@ -90,19 +90,29 @@ public class MapItemsExample {
     }
 
     public void showCenteredMapMarkers() {
-        unTiltMap();
+        if (Settings.Cardmode){
+            unTiltMap();
+        }else {
+            tiltMap();
+        }
+
 
         GeoCoordinates geoCoordinates = new GeoCoordinates(48.190798, 16.400408); //createRandomGeoCoordinatesAroundMapCenter();
 
         // Centered on location.
         addPhotoMapMarker(geoCoordinates);
         for (MemoryItem m:MainActivity.lst_memories) {
-            addPhotoMapMarker(new GeoCoordinates(m.getCoordLat(), m.getCoordLon()), R.drawable.card1);
+            GeoCoordinates geo = new GeoCoordinates(m.getCoordLat(), m.getCoordLon());
+            addPhotoMapMarker(geo, R.drawable.card1);
+
+            if (Settings.Dot){
+                addCircleMapMarker(geo);
+            }
+
         }
 
         // Centered on location. Shown above the photo marker to indicate the location.
         // The draw order is determined from what is first added to the map.
-        //addCircleMapMarker(geoCoordinates);
     }
 
     public void showLocationIndicatorPedestrian() {

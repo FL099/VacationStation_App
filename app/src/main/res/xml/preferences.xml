@@ -2,14 +2,14 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     >
     <CheckBoxPreference
-        android:key="checkbox"
-        android:summary="Tap to check if on or off"
-        android:title="Checkbox Preference"
+        android:key="redDot"
+        android:summary="Zum genaueren zuordnen roten Punkt auf Bildern anzeigen"
+        android:title="Checkbox roter Punkt"
         />
 
     <SwitchPreference
         android:defaultValue="false"
-        android:key="switch_preference_1"
+        android:key="card_pref"
         android:title="Karte im 3D Modus starten" />
 
 

@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -13,9 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vacationstation.MapItemsExample;
-import com.example.vacationstation.MapViewPinExample;
 import com.example.vacationstation.PermissionsRequestor;
-import com.here.sdk.core.GeoCoordinates;
 //import com.here.sdk.core.OnEngineInitListener;
 //import com.here.sdk.core.mapping.Map;
 //import com.here.sdk.core.MapFragment;
@@ -37,7 +34,6 @@ public class MapFragment extends Fragment {
 
     private PermissionsRequestor permissionsRequestor;
     private MapView mapView;
-    private MapViewPinExample mapViewPinExample; //TODO: entfernen, ist unnötig
     private com.example.vacationstation.MapItemsExample mapItemsExample;
 
     public MapFragment() {
@@ -94,21 +90,14 @@ public class MapFragment extends Fragment {
 
     private void loadMapScene() {
         // Load a scene from the SDK to render the map with a map style.
-        /*mapView.getMapScene().loadScene(MapScheme.NORMAL_DAY, mapError -> {
-            if (mapError == null) {
-                mapViewPinExample = new MapViewPinExample( getActivity(), mapView);
-                mapViewPinExample.showAnchoredMapViewPin();
-            } else {
-                Log.d(TAG, "Loading map scene failed: " + mapError.toString());
-            }
-        });*/
+
 
         mapView.getMapScene().loadScene(MapScheme.NORMAL_DAY, new MapScene.LoadSceneCallback() {
             @Override
             public void onLoadScene(@Nullable MapError mapError) {
                 if (mapError == null) {
                     mapItemsExample = new MapItemsExample(getActivity(), mapView);
-                    mapItemsExample.showAnchoredMapMarkers(); //normaler pin
+                    //mapItemsExample.showAnchoredMapMarkers(); //normaler pin
                     mapItemsExample.showCenteredMapMarkers();
                 } else {
                     Log.d(TAG, "onLoadScene failed: " + mapError.toString());

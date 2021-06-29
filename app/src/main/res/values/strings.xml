@@ -23,6 +23,7 @@
     <string name="add_button">Add</string>
     <string name="home_bspStadt">BeispielStadt</string>
     <string name="home_bspDesc">Beispielbeschreibung</string>
+    <string name="add_loc">Location (optional (Format: 1.234 N, 2,345 E))</string>
 
 
 </resources>
