@@ -18,23 +18,17 @@ import com.example.vacationstation.MainActivity;
 import com.example.vacationstation.MemoryItem;
 import com.example.vacationstation.R;
 
-import org.json.JSONArray;
+/*import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.LinkedList;
+import java.util.LinkedList;*/
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Overview#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Overview extends Fragment {
 
     public ListAdapter mAdapter;
 
-    Button btn_swap;
     private List<MemoryItem> lst_memories;
     private List<String> lst_places;
 

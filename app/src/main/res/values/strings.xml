@@ -21,6 +21,8 @@
     <string name="add_tags">Tags (optional)</string>
     <string name="add_comment">Comment (optional)</string>
     <string name="add_button">Add</string>
+    <string name="home_bspStadt">BeispielStadt</string>
+    <string name="home_bspDesc">Beispielbeschreibung</string>
 
 
 </resources>

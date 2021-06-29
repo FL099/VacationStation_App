@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_marginBottom="80dp"
         android:layout_height="match_parent"
-
         android:layout_marginHorizontal="30dp"
         ><!--android:cardBackgroundColor="@color/black"
         android:cardCornerRadius="4dp"-->
@@ -40,13 +39,31 @@
         android:layout_alignEnd="@id/card_img"
         android:layout_alignBottom="@id/card_img"
         android:layout_margin="1dp"
+        android:paddingHorizontal="10dp"
+        android:paddingBottom="90dp"
         android:gravity="bottom"
         android:textSize="34sp"
         android:textFontWeight="700"
         android:shadowColor="@color/black"
-
-        android:text="@string/hello_blank_fragment"
+        android:text="@string/home_bspStadt"
         android:textColor="#ffffff" />
+
+        <TextView
+        android:id="@+id/card_text_desc"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_alignStart="@id/card_img"
+        android:layout_alignEnd="@id/card_img"
+        android:layout_alignBottom="@id/card_img"
+        android:layout_margin="1dp"
+        android:padding="10dp"
+        android:gravity="top"
+        android:textSize="20sp"
+        android:shadowColor="@color/black"
+        android:text="@string/home_bspDesc"
+        android:textColor="#ffffff" />
+
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
 
