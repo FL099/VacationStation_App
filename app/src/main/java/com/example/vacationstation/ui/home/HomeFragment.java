@@ -76,33 +76,25 @@ public class HomeFragment extends Fragment {
         card.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+
+                MemoryItem temp = lst_memories.get(curr);
+                cardText.setText(temp.getName());
+                cardDesc.setText(temp.getComment());
+                String t = temp.getImgPath();
+                String[] tm = t.split("\\.");
+
+                cardImg.setImageResource(getResources().getIdentifier(tm[0], "drawable", getActivity().getPackageName()));
                 if (curr < len_mem-1) {
                     curr++;
                 }
                 else {
                     curr = 0;
                 }
-                MemoryItem temp = lst_memories.get(curr);
-                cardText.setText(temp.getName());
-                cardDesc.setText(temp.getComment());
-                String t = temp.getImgPath();
-                String[] tm = t.split("\\.");
-                String r = tm[0];
-                String e = tm[1];
-                cardImg.setImageResource(getResources().getIdentifier(tm[0], "drawable", getActivity().getPackageName()));
             }
         });
 
 
         return view;
     }
-    private int getResId(String resName) {
-        int defId = -1;
-        try {
-            Field f = R.drawable.class.getDeclaredField(resName);
-            return f.getInt(null);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            return R.drawable.here_car;
-        }
-    }
+
 }
