@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.vacationstation.MainActivity;
 import com.example.vacationstation.MemoryItem;
 import com.example.vacationstation.R;
+import com.example.vacationstation.Settings;
 
 
 public class    Add extends Fragment {

@@ -26,4 +26,5 @@
     <string name="home_bspDesc">Beispielbeschreibung</string>
     <string name="add_loc">Location (optional (Format: 1.234 N, 2,345 E))</string>
     <string name="username">Username</string>
+    <string name="password">Passwort</string>
 </resources>

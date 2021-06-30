@@ -1,15 +1,18 @@
 package com.example.vacationstation;
 
 import android.content.ContentValues;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.provider.BaseColumns;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.here.olp.network.HttpClient;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +20,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.EditTextPreference;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,9 +30,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -40,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_TEXT = "resultText";
     public static List<MemoryItem> lst_memories = new LinkedList<MemoryItem>();
     public static List<String> lst_places = new LinkedList<String>();
+    public static  String credentials = "";
 
     /*MemoryItemDbHelper dbHelper;
     SQLiteDatabase db;*/
@@ -56,7 +63,12 @@ public class MainActivity extends AppCompatActivity {
         /*dbHelper = new MemoryItemDbHelper(this);
         db = dbHelper.getWritableDatabase();*/
 
-        //TODO: entfernen
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String user = prefs.getString("username", "u1");
+        String passwd = prefs.getString("password", "p1");
+
+
+        getCredentials(user, passwd);
 
         lst_memories = generateContent();
 
@@ -78,6 +90,92 @@ public class MainActivity extends AppCompatActivity {
             if (savedInstanceState.containsKey(KEY_TEXT)) {
 
             }
+        }
+    }
+
+    private void getCredentials (String user, String password) {
+        CredentialsGetter credentialsGetter = new CredentialsGetter(user, password);
+        new Thread(credentialsGetter).start();
+    }
+
+
+
+    class CredentialsGetter implements Runnable {
+
+        URL url;
+        String user;
+        String pwd;
+
+        CredentialsGetter(String us, String pw) {
+            this.user = us;
+            this.pwd =pw;
+            try {
+                url = new URL("https://localhost:11080/api/login/");
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        @Override
+        public void run() {
+
+            try {
+                HttpURLConnection http = (HttpURLConnection) url.openConnection();
+                http.setRequestMethod("POST");
+                http.setDoOutput(true);
+
+                String out = "{\"username\":\"" + user + "\",\"password\":\"" + pwd + "\"}";
+                int length = out.length();
+
+                http.setFixedLengthStreamingMode(length);
+                http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                http.connect();
+                try (OutputStream os = http.getOutputStream()) {
+                    os.write(out.getBytes(StandardCharsets.UTF_8));
+                }
+
+                InputStream is = http.getInputStream();
+                credentials = is.toString();
+
+            /*HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("POST");
+            urlConnection.addRequestProperty("username", user);
+            urlConnection.addRequestProperty("passwort", password);
+
+            InputStream in = urlConnection.getInputStream();
+
+            Scanner scanner = new Scanner(in);
+            scanner.useDelimiter("\\A");
+
+            String out2 = "";
+
+
+            if (scanner.hasNext()) {
+
+                JSONObject root = new JSONObject(scanner.next());
+                JSONArray results = root.getJSONArray("memories");
+
+                for (int i = 0; i < results.length(); i++) {
+                    JSONObject result = results.getJSONObject(i);
+
+                    MemoryItem mc = new MemoryItem(result);
+                    lst_memories.add(mc);
+                    out += mc.getMemoryItemData();
+
+
+                }
+
+
+            }
+
+        */
+            } catch (IOException e) { //| JSONException
+                e.printStackTrace();
+            }
+
+
         }
     }
 
@@ -105,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             Handler mainHandler = new Handler(Looper.getMainLooper());
+
 
 
             try {
@@ -159,14 +258,14 @@ public class MainActivity extends AppCompatActivity {
                     "\"name\": \"Paris\",\n" +
                     "\"contents\": [\n" +
                     "{\n" +
-                    "\"filename\": \"eiffelturm1.jpg\",\n" +
+                    "\"filename\": \"bild1.png\",\n" +
                     "\"coordinates\": \"40.858370 N, 2.294481 E\",\n" +
                     "\"datetime\": \"12:00:01 1.1.2021\",\n" +
                     "\"tags\": [\"historic\", \"france\"],\n" +
                     "\"comment\":\"stunning\"\n" +
                     "},\n" +
                     "{\n" +
-                    "\"filename\": \"eiffelturm3.jpg\",\n" +
+                    "\"filename\": \"bild2.png\",\n" +
                     "\"coordinates\": \"48.858370 N, 5.294481 W\",\n" +
                     "\"datetime\": \"13:00:01 1.1.2021\",\n" +
                     "\"tags\": [\"historic\", \"france\"],\n" +
@@ -179,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
                     "\"name\": \"Rom\",\n" +
                     "\"contents\": [\n" +
                     "{\n" +
-                    "\"filename\": \"Montmatre.jpg\",\n" +
+                    "\"filename\": \"here_car.png\",\n" +
                     "\"coordinates\": \"1.858370 S, 2.294481 E\",\n" +
                     "\"datetime\": \"12:00:01 1.1.2021\",\n" +
                     "\"tags\": [\"historic\", \"italy\"],\n" +

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.example.vacationstation.R;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 
@@ -27,6 +29,7 @@ public class HomeFragment extends Fragment {
     private static CardView card;
     private static TextView cardText;
     private static TextView cardDesc;
+    private static ImageView cardImg;
     private int curr;
 
     private static List<MemoryItem> lst_memories;
@@ -64,6 +67,7 @@ public class HomeFragment extends Fragment {
         int len_mem = lst_memories.size();
 
         card = view.findViewById(R.id.card_view);
+        cardImg = view.findViewById(R.id.card_img);
         cardText = view.findViewById(R.id.card_text);
         cardText.setText("Paris");
         cardDesc = view.findViewById(R.id.card_text_desc);
@@ -81,11 +85,24 @@ public class HomeFragment extends Fragment {
                 MemoryItem temp = lst_memories.get(curr);
                 cardText.setText(temp.getName());
                 cardDesc.setText(temp.getComment());
-
+                String t = temp.getImgPath();
+                String[] tm = t.split("\\.");
+                String r = tm[0];
+                String e = tm[1];
+                cardImg.setImageResource(getResources().getIdentifier(tm[0], "drawable", getActivity().getPackageName()));
             }
         });
 
 
         return view;
+    }
+    private int getResId(String resName) {
+        int defId = -1;
+        try {
+            Field f = R.drawable.class.getDeclaredField(resName);
+            return f.getInt(null);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            return R.drawable.here_car;
+        }
     }
 }

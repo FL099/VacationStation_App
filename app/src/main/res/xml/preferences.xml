@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="redDot"
@@ -14,10 +14,15 @@
         android:title="Karte im 3D Modus starten" />
 
     <EditTextPreference
-        android:defaultValue="test"
+        android:defaultValue="user1"
         android:key="username"
         android:title="@string/username"
         />
 
+    <EditTextPreference
+        android:defaultValue="passwort1"
+        android:key="password"
+        app:title="@string/password"
+        />
 
 </PreferenceScreen>
