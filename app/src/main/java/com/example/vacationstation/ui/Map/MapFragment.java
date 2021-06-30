@@ -97,7 +97,6 @@ public class MapFragment extends Fragment {
             public void onLoadScene(@Nullable MapError mapError) {
                 if (mapError == null) {
                     mapItemsExample = new MapItemsExample(getActivity(), mapView);
-                    //mapItemsExample.showAnchoredMapMarkers(); //normaler pin
                     mapItemsExample.showCenteredMapMarkers();
                 } else {
                     Log.d(TAG, "onLoadScene failed: " + mapError.toString());

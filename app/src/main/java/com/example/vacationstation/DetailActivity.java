@@ -35,7 +35,7 @@ public class DetailActivity extends AppCompatActivity {
         String[] tm = it.getImgPath().split("\\.");
         img.setImageResource(getResources().getIdentifier(tm[0], "drawable", getPackageName())); //.setImageResource(R.drawable.card1);//TODO ändern auf jeweiliges Bild
 
-        img_title.setText(it.getName());
+        img_title.setText(tm[0]);
         img_title.setTextSize(30);
         img_tags.setText("tags: " +it.getTags());
         img_comment.setText("Your comment: "+it.getComment());

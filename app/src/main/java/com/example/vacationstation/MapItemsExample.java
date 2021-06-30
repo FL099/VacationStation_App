@@ -22,11 +22,16 @@ package com.example.vacationstation;
 import android.content.Context;
 import android.content.res.AssetManager;
 import androidx.appcompat.app.AlertDialog;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.vacationstation.ui.Map.MapFragment;
 import com.here.sdk.core.Anchor2D;
 import com.here.sdk.core.Color;
 import com.here.sdk.core.GeoCoordinates;
@@ -59,6 +64,8 @@ public class MapItemsExample {
     private final List<MapMarker3D> mapMarker3DList = new ArrayList<>();
     private final List<LocationIndicator> locationIndicatorList = new ArrayList<>();
 
+    //Taken from: HERE API
+
     public MapItemsExample(Context context, MapView mapView) {
         this.context = context;
         this.mapView = mapView;
@@ -73,21 +80,7 @@ public class MapItemsExample {
         Toast.makeText(context, "You can tilt the map with two fingers ", Toast.LENGTH_LONG).show();
     }
 
-    public void showAnchoredMapMarkers() {
-        unTiltMap();
 
-        for (int i = 0; i < 10; i++) {
-            //TODO ändern
-            GeoCoordinates geoCoordinates = new GeoCoordinates(48.090798, 16.400408); //createRandomGeoCoordinatesAroundMapCenter();
-
-            // Centered on location. Shown below the POI image to indicate the location.
-            // The draw order is determined from what is first added to the map.
-            addCircleMapMarker(geoCoordinates);
-
-            // Anchored, pointing to location.
-            addPhotoMapMarker(geoCoordinates);
-        }
-    }
 
     public void showCenteredMapMarkers() {
         if (Settings.Cardmode){
@@ -102,11 +95,13 @@ public class MapItemsExample {
         // Centered on location.
         addPhotoMapMarker(geoCoordinates);
 
-
-
         for (MemoryItem m:MainActivity.lst_memories) {
             GeoCoordinates geo = new GeoCoordinates(m.getCoordLat(), m.getCoordLon());
+            String[] tm = m.getImgPath().split("\\.");
             addPhotoMapMarker(geo, R.drawable.card1);
+            //img.setImageResource(getResources().getIdentifier(tm[0], "drawable", getPackageName()));
+            //addPhotoMapMarker(geo, context.getResources().getIdentifier(tm[0], "drawable", context.getPackageName())); //TODO: funktioniert bis auf Größe
+            //addPhotoMapMarker(geo,tm[0] ); //TODO: funktioniert nicht wegen Pfad vermutlich
 
             if (!Settings.Dot){
                 addCircleMapMarker(geo);
@@ -114,8 +109,6 @@ public class MapItemsExample {
 
         }
 
-        // Centered on location. Shown above the photo marker to indicate the location.
-        // The draw order is determined from what is first added to the map.
     }
 
     public void showLocationIndicatorPedestrian() {
@@ -194,7 +187,18 @@ public class MapItemsExample {
         mapMarkerList.add(mapMarker);
     }
 
+    private void addPhotoMapMarker(GeoCoordinates geoCoordinates, String photoId) {
+        Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile("android.resource://com.example.vacationstation/" + photoId), 50, 50);
+        //MapImage mapImage = MapImageFactory.fromResource(context.getResources(), photoId);
+        MapImage mapImage = MapImageFactory.fromBitmap(ThumbImage);
+        MapMarker mapMarker = new MapMarker(geoCoordinates, mapImage);
+
+        mapView.getMapScene().addMapMarker(mapMarker);
+        mapMarkerList.add(mapMarker);
+    }
+
     private void addPhotoMapMarker(GeoCoordinates geoCoordinates, int photoId) {
+
         MapImage mapImage = MapImageFactory.fromResource(context.getResources(), photoId);
         MapMarker mapMarker = new MapMarker(geoCoordinates, mapImage);
 

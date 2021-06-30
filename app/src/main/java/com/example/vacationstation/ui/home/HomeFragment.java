@@ -76,12 +76,13 @@ public class HomeFragment extends Fragment {
         card.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-
                 MemoryItem temp = lst_memories.get(curr);
-                cardText.setText(temp.getName());
-                cardDesc.setText(temp.getComment());
                 String t = temp.getImgPath();
                 String[] tm = t.split("\\.");
+
+                cardText.setText(tm[0]);
+                cardDesc.setText(temp.getComment());
+
 
                 cardImg.setImageResource(getResources().getIdentifier(tm[0], "drawable", getActivity().getPackageName()));
                 if (curr < len_mem-1) {

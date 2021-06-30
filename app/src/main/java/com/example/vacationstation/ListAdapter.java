@@ -76,7 +76,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ItemViewHolder
 
 
         public void bind(int position) {
-            tvName.setText(mItems.get(position).getName());
+            String[] tm = mItems.get(position).getName().split("\\.");
+            tvName.setText(tm[0]);
             tvTags.setText(mItems.get(position).getTags());
             //llItem.setBackgroundResource(mItems.get(position).getColor());
         }

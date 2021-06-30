@@ -265,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
                     "\"comment\":\"stunning\"\n" +
                     "},\n" +
                     "{\n" +
-                    "\"filename\": \"bild2.png\",\n" +
+                    "\"filename\": \"bild3.jpg\",\n" +
                     "\"coordinates\": \"48.858370 N, 5.294481 W\",\n" +
                     "\"datetime\": \"13:00:01 1.1.2021\",\n" +
                     "\"tags\": [\"historic\", \"france\"],\n" +
@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
                     "\"coordinates\": \"1.858370 S, 2.294481 E\",\n" +
                     "\"datetime\": \"12:00:01 1.1.2021\",\n" +
                     "\"tags\": [\"historic\", \"italy\"],\n" +
-                    "\"comment\":\"stunning\"\n" +
+                    "\"comment\":\"Ziemlich schön\"\n" +
                     "}\n" +
                     "]\n" +
                     "}\n" +
